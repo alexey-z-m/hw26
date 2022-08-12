@@ -1,0 +1,2 @@
+# hw26
+CoreData
