@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  hw26
-//
-//  Created by Panda on 12.08.2022.
-//
-
 import UIKit
 
 @main

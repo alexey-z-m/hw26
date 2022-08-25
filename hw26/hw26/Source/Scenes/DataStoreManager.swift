@@ -1,15 +1,8 @@
-//
-//  DataStoreManager.swift
-//  hw26
-//
-//  Created by Panda on 18.08.2022.
-//
-
 import UIKit
 import CoreData
 
 class DataStoreManager {
-    
+
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
@@ -21,7 +14,6 @@ class DataStoreManager {
         })
         return container
     }()
-    
     
     lazy var viewContext: NSManagedObjectContext = {
         return persistentContainer.viewContext
@@ -41,24 +33,53 @@ class DataStoreManager {
         }
     }
     
-    func obtainMainUser() -> User {
+    func addUser(name: String) {
         let user = User(context: viewContext)
-        user.name = "Ivan Petrov"
-        let dateFormatter = DateFormatter()
-        let dateBirthday = "21/05/1993"
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        user.birthday = dateFormatter.date(from: dateBirthday)
-        
+        user.name = name
+        user.id = UUID()
         do {
             try viewContext.save()
         } catch let error {
                 print("Error: \(error)")
         }
-        return user
     }
     
-//    func updateMainUser(with name: String, birthday: String) {
-//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
-//        fetchRequest.predicate = NSPredicate(format: "name = ")
-//    }
+    func deleteUser(id: String) {
+        guard let user = getUsersById(id: id) else { return }
+        viewContext.delete(user)
+        saveContext()
+    }
+    
+    func getAllUsers() -> [User] {
+        var users = [User]()
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        do {
+            users = try viewContext.fetch(fetchRequest) as [User]
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+        return users
+    }
+    
+    func getUsersById(id: String) -> User? {
+        var user = [User]()
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id = %@", id)
+        do {
+            user = try viewContext.fetch(fetchRequest)
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+        return user.first
+    }
+    
+    func updateUser(id: String, name: String, birthday: String, gender: String) {
+        guard let user = getUsersById(id: id) else { return }
+        user.name = name
+        user.birthday = birthday.convertToDate()
+        user.gender = gender
+        try? viewContext.save()
+    }
 }

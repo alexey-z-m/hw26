@@ -11,6 +11,9 @@
 		BA1E392E28AE694600947E48 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1E392C28AE694600947E48 /* User+CoreDataProperties.swift */; };
 		BA1E392F28AE694600947E48 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1E392D28AE694600947E48 /* User+CoreDataClass.swift */; };
 		BA1E393128AE705B00947E48 /* DataStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1E393028AE705B00947E48 /* DataStoreManager.swift */; };
+		BA1E393328B3620800947E48 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1E393228B3620800947E48 /* MainTableViewCell.swift */; };
+		BA1E393528B36C7500947E48 /* UserDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1E393428B36C7500947E48 /* UserDetailTableViewCell.swift */; };
+		BA1E393728B3B6F100947E48 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1E393628B3B6F100947E48 /* DateExtension.swift */; };
 		BA8BEA7228A63FA70002AE6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8BEA7128A63FA70002AE6C /* AppDelegate.swift */; };
 		BA8BEA7428A63FA70002AE6C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8BEA7328A63FA70002AE6C /* SceneDelegate.swift */; };
 		BA8BEA7628A63FA70002AE6C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8BEA7528A63FA70002AE6C /* ViewController.swift */; };
@@ -27,6 +30,9 @@
 		BA1E392C28AE694600947E48 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "/Users/Panda/Documents/Fork/hw26/hw26/hw26/Source/Scenes/User+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		BA1E392D28AE694600947E48 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "User+CoreDataClass.swift"; path = "/Users/Panda/Documents/Fork/hw26/hw26/hw26/Source/Scenes/User+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		BA1E393028AE705B00947E48 /* DataStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreManager.swift; sourceTree = "<group>"; };
+		BA1E393228B3620800947E48 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		BA1E393428B36C7500947E48 /* UserDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailTableViewCell.swift; sourceTree = "<group>"; };
+		BA1E393628B3B6F100947E48 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		BA8BEA6E28A63FA70002AE6C /* hw26.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hw26.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8BEA7128A63FA70002AE6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA8BEA7328A63FA70002AE6C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +140,9 @@
 				BA8BEA7528A63FA70002AE6C /* ViewController.swift */,
 				BA8BEA8C28A652C60002AE6C /* UserDetail.swift */,
 				BA1E393028AE705B00947E48 /* DataStoreManager.swift */,
+				BA1E393228B3620800947E48 /* MainTableViewCell.swift */,
+				BA1E393428B36C7500947E48 /* UserDetailTableViewCell.swift */,
+				BA1E393628B3B6F100947E48 /* DateExtension.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -254,9 +263,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA8BEA7C28A63FA70002AE6C /* hw26.xcdatamodeld in Sources */,
+				BA1E393328B3620800947E48 /* MainTableViewCell.swift in Sources */,
 				BA8BEA7628A63FA70002AE6C /* ViewController.swift in Sources */,
 				BA1E392E28AE694600947E48 /* User+CoreDataProperties.swift in Sources */,
+				BA1E393728B3B6F100947E48 /* DateExtension.swift in Sources */,
 				BA1E393128AE705B00947E48 /* DataStoreManager.swift in Sources */,
+				BA1E393528B36C7500947E48 /* UserDetailTableViewCell.swift in Sources */,
 				BA8BEA7228A63FA70002AE6C /* AppDelegate.swift in Sources */,
 				BA8BEA8D28A652C60002AE6C /* UserDetail.swift in Sources */,
 				BA8BEA7428A63FA70002AE6C /* SceneDelegate.swift in Sources */,

@@ -4,6 +4,10 @@ import SnapKit
 class ViewController: UIViewController {
 
     var countOfRows = 5
+    func getUsers() -> [User] {
+        let user = DataStoreManager().getAllUsers()
+        return user
+    }
     let labelUsers: UILabel = {
        let label = UILabel()
         label.font = .systemFont(ofSize: 30, weight: .bold)
@@ -16,14 +20,15 @@ class ViewController: UIViewController {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.backgroundColor = .systemGray6
-        textField.placeholder = "Print your name here"
+        textField.placeholder = "Print user name here"
         return textField
     }()
     
     let button: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .systemBlue
-        button.setTitle("Press", for: .normal)
+        button.setTitle("Add User", for: .normal)
+        button.addTarget(self, action: #selector(addUser), for: .touchUpInside)
         button.setTitleColor( .white, for: .normal)
         button.layer.cornerRadius = 10
         return button
@@ -31,8 +36,20 @@ class ViewController: UIViewController {
     
     let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .insetGrouped)
+        table.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.identifier)
         return table
     }()
+    
+    @objc func addUser() {
+        guard let name = textField.text else { return }
+        if name != "" {
+            DataStoreManager().addUser(name: name)
+            textField.text = ""
+            tableView.reloadData()
+        } else {
+            // add alert msg
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,13 +94,15 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        present(UserDetail(), animated: true)
+        let userDetail = UserDetail()
+        userDetail.idUser = DataStoreManager().getAllUsers()[indexPath.row].id?.uuidString
+        present(userDetail, animated: true)
     }
 }
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        countOfRows
+        return getUsers().count
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -92,12 +111,22 @@ extension ViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            countOfRows -= 1
+            let user = getUsers()[indexPath.row]
+            DataStoreManager().deleteUser(id: user.id?.uuidString ?? "")
             tableView.reloadData()
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: MainTableViewCell.identifier,
+            for: indexPath
+        ) as? MainTableViewCell else {
+            return UITableViewCell()
+        }
+        let user = getUsers()[indexPath.row]
+        cell.accessoryType = .disclosureIndicator
+        cell.configure(with: user)
+        return cell
     }
 }
