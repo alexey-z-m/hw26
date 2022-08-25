@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:/Users/Panda/Documents/Fork/hw26/hw26/hw26/Source/Scenes/User+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/Panda/Documents/Fork/hw26/hw26/hw26/Source/Scenes/User+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:hw26.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+</Workspace>
