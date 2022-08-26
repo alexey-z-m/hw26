@@ -59,6 +59,9 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
     
     func setupHierarchy() {
         view.addSubview(labelUsers)

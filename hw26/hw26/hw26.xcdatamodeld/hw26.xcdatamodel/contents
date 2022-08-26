@@ -4,9 +4,10 @@
         <attribute name="birthday" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="gender" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="name" attributeType="String"/>
     </entity>
     <elements>
-        <element name="User" positionX="-1732.8046875" positionY="-311.33203125" width="128" height="103"/>
+        <element name="User" positionX="-1732.8046875" positionY="-311.33203125" width="128" height="104"/>
     </elements>
 </model>

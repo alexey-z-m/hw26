@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3571C25459E163574E8E20BE /* Pods_hw26.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8220F9716477C3ECE6016643 /* Pods_hw26.framework */; };
-		BA1E392E28AE694600947E48 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1E392C28AE694600947E48 /* User+CoreDataProperties.swift */; };
-		BA1E392F28AE694600947E48 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1E392D28AE694600947E48 /* User+CoreDataClass.swift */; };
 		BA1E393128AE705B00947E48 /* DataStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1E393028AE705B00947E48 /* DataStoreManager.swift */; };
 		BA1E393328B3620800947E48 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1E393228B3620800947E48 /* MainTableViewCell.swift */; };
 		BA1E393728B3B6F100947E48 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1E393628B3B6F100947E48 /* DateExtension.swift */; };
@@ -21,13 +19,13 @@
 		BA8BEA7E28A63FA80002AE6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA8BEA7D28A63FA80002AE6C /* Assets.xcassets */; };
 		BA8BEA8128A63FA80002AE6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA8BEA7F28A63FA80002AE6C /* LaunchScreen.storyboard */; };
 		BA8BEA8D28A652C60002AE6C /* UserDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8BEA8C28A652C60002AE6C /* UserDetail.swift */; };
+		BADD533E28B902FF0084419D /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADD533D28B902FF0084419D /* User+CoreDataProperties.swift */; };
+		BADD533F28B902FF0084419D /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADD533C28B902FF0084419D /* User+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5DFFF05D3C214CB4B7613930 /* Pods-hw26.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hw26.debug.xcconfig"; path = "Target Support Files/Pods-hw26/Pods-hw26.debug.xcconfig"; sourceTree = "<group>"; };
 		8220F9716477C3ECE6016643 /* Pods_hw26.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hw26.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA1E392C28AE694600947E48 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "/Users/Panda/Documents/Fork/hw26/hw26/hw26/Source/Scenes/User+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
-		BA1E392D28AE694600947E48 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "User+CoreDataClass.swift"; path = "/Users/Panda/Documents/Fork/hw26/hw26/hw26/Source/Scenes/User+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		BA1E393028AE705B00947E48 /* DataStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreManager.swift; sourceTree = "<group>"; };
 		BA1E393228B3620800947E48 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		BA1E393628B3B6F100947E48 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
@@ -41,6 +39,8 @@
 		BA8BEA8028A63FA80002AE6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA8BEA8228A63FA80002AE6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA8BEA8C28A652C60002AE6C /* UserDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetail.swift; sourceTree = "<group>"; };
+		BADD533C28B902FF0084419D /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "User+CoreDataClass.swift"; path = "/Users/Panda/Documents/Fork/hw26/hw26/hw26/Source/Scenes/Model/User+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		BADD533D28B902FF0084419D /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "/Users/Panda/Documents/Fork/hw26/hw26/hw26/Source/Scenes/Model/User+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		BC1C9928350958AE6A8F4294 /* Pods-hw26.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hw26.release.xcconfig"; path = "Target Support Files/Pods-hw26/Pods-hw26.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,8 +76,8 @@
 		BA1E393828B8A80700947E48 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BA1E392D28AE694600947E48 /* User+CoreDataClass.swift */,
-				BA1E392C28AE694600947E48 /* User+CoreDataProperties.swift */,
+				BADD533C28B902FF0084419D /* User+CoreDataClass.swift */,
+				BADD533D28B902FF0084419D /* User+CoreDataProperties.swift */,
 				BA1E393028AE705B00947E48 /* DataStoreManager.swift */,
 			);
 			path = Model;
@@ -294,13 +294,13 @@
 				BA8BEA7C28A63FA70002AE6C /* hw26.xcdatamodeld in Sources */,
 				BA1E393328B3620800947E48 /* MainTableViewCell.swift in Sources */,
 				BA8BEA7628A63FA70002AE6C /* ViewController.swift in Sources */,
-				BA1E392E28AE694600947E48 /* User+CoreDataProperties.swift in Sources */,
 				BA1E393728B3B6F100947E48 /* DateExtension.swift in Sources */,
+				BADD533F28B902FF0084419D /* User+CoreDataClass.swift in Sources */,
 				BA1E393128AE705B00947E48 /* DataStoreManager.swift in Sources */,
 				BA8BEA7228A63FA70002AE6C /* AppDelegate.swift in Sources */,
 				BA8BEA8D28A652C60002AE6C /* UserDetail.swift in Sources */,
 				BA8BEA7428A63FA70002AE6C /* SceneDelegate.swift in Sources */,
-				BA1E392F28AE694600947E48 /* User+CoreDataClass.swift in Sources */,
+				BADD533E28B902FF0084419D /* User+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

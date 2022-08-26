@@ -72,11 +72,12 @@ class DataStoreManager {
         return user.first
     }
     
-    func updateUser(id: String, name: String, birthday: String, gender: String) {
+    func updateUser(id: String, name: String, birthday: String, gender: String, image: Data?) {
         guard let user = getUsersById(id: id) else { return }
         user.name = name
         user.birthday = birthday.convertToDate()
         user.gender = gender
+        user.image = image
         saveContext()
     }
 }
