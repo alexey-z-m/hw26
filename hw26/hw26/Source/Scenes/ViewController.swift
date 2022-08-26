@@ -53,6 +53,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         setupHierarchy()
         setupLayout()
         tableView.delegate = self
@@ -96,7 +97,8 @@ extension ViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let userDetail = UserDetail()
         userDetail.idUser = DataStoreManager().getAllUsers()[indexPath.row].id?.uuidString
-        present(userDetail, animated: true)
+        //present(userDetail, animated: true)
+        navigationController?.pushViewController(userDetail, animated: true)
     }
 }
 
@@ -130,3 +132,4 @@ extension ViewController: UITableViewDataSource {
         return cell
     }
 }
+
