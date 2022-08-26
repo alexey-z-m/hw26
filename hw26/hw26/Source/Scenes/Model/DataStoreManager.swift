@@ -21,12 +21,13 @@ class DataStoreManager {
 
     // MARK: - Core Data Saving support
 
-    func saveContext () {
+    func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
                 try context.save()
             } catch {
+                context.rollback()
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
@@ -37,11 +38,7 @@ class DataStoreManager {
         let user = User(context: viewContext)
         user.name = name
         user.id = UUID()
-        do {
-            try viewContext.save()
-        } catch let error {
-                print("Error: \(error)")
-        }
+        saveContext()
     }
     
     func deleteUser(id: String) {
@@ -80,6 +77,6 @@ class DataStoreManager {
         user.name = name
         user.birthday = birthday.convertToDate()
         user.gender = gender
-        try? viewContext.save()
+        saveContext()
     }
 }

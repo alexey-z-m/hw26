@@ -28,12 +28,48 @@ class UserDetail: UIViewController {
         return image
     }()
     
-    let table: UITableView = {
-        let table = UITableView(frame: .zero, style: .plain)
-        table.register(UserDetailTableViewCell.self, forCellReuseIdentifier: UserDetailTableViewCell.identifier)
-        table.isUserInteractionEnabled = false
-        table.backgroundColor = .systemGray5
-        return table
+    let nameField: UITextField = {
+        let field = UITextField()
+        field.borderStyle = .roundedRect
+        field.placeholder = "Print your name here"
+        let iconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+        let icon = UIImageView(frame: CGRect(x: 15, y: 15, width: 30, height: 30))
+        icon.image = UIImage(systemName: "person")
+        icon.contentMode = .scaleAspectFit
+        iconContainer.addSubview(icon)
+        field.leftView = iconContainer
+        field.leftViewMode = .always
+        return field
+    }()
+    
+    let birthdayField: UITextField = {
+        let field = UITextField()
+        field.borderStyle = .roundedRect
+        field.placeholder = "Print your birthday here"
+        let iconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+        let icon = UIImageView(frame: CGRect(x: 15, y: 15, width: 30, height: 30))
+        icon.image = UIImage(systemName: "calendar")
+        icon.contentMode = .scaleAspectFit
+        iconContainer.addSubview(icon)
+        field.leftView = iconContainer
+        field.leftViewMode = .always
+        return field
+    }()
+    
+    let genderField: UITextField = {
+        let field = UITextField()
+        field.borderStyle = .roundedRect
+        field.placeholder = "Print your gender here"
+        field.isEnabled = false
+        field.backgroundColor = .systemGray5
+        let iconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+        let icon = UIImageView(frame: CGRect(x: 15, y: 15, width: 30, height: 30))
+        icon.image = UIImage(systemName: "person.2")
+        icon.contentMode = .scaleAspectFit
+        iconContainer.addSubview(icon)
+        field.leftView = iconContainer
+        field.leftViewMode = .always
+        return field
     }()
 
     override func viewDidLoad() {
@@ -41,17 +77,16 @@ class UserDetail: UIViewController {
         view.backgroundColor = .white
         setupHierarchy()
         setupLayout()
-        model = DataStoreManager().getUsersById(id: idUser ?? "")
+        fillField(id: idUser)
     }
     
     func setupHierarchy() {
-        view.backgroundColor = .systemGray5
         view.addSubview(buttonClose)
         view.addSubview(buttonEditSave)
         view.addSubview(imageUser)
-        view.addSubview(table)
-        table.dataSource = self
-        table.delegate = self
+        view.addSubview(nameField)
+        view.addSubview(birthdayField)
+        view.addSubview(genderField)
     }
 
     func setupLayout() {
@@ -68,18 +103,39 @@ class UserDetail: UIViewController {
             make.height.width.equalTo(200)
             make.centerX.equalToSuperview()
         }
-        table.snp.makeConstraints { make in
-            make.top.equalTo(imageUser.snp.bottom).offset(20)
-            make.left.right.equalToSuperview()
-            make.bottom.equalToSuperview()
+        nameField.snp.makeConstraints { make in
+            make.top.equalTo(imageUser.snp.bottom).offset(100)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.height.equalTo(60)
+        }
+        birthdayField.snp.makeConstraints { make in
+            make.top.equalTo(nameField.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.height.equalTo(60)
+        }
+        genderField.snp.makeConstraints { make in
+            make.top.equalTo(birthdayField.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.height.equalTo(60)
         }
     }
     
     @objc func editAndSaveMode() {
-        
         if isEditingMode {
             guard let idUser = idUser else { return }
-            DataStoreManager().updateUser(id: idUser, name: "us", birthday: "12/12/2000", gender: "ew")
+            if nameField.text == "" {
+                //alert
+                return
+            }
+            DataStoreManager().updateUser(
+                id: idUser,
+                name: nameField.text ?? "",
+                birthday: birthdayField.text ?? "",
+                gender: genderField.text ?? ""
+            )
         }
         toggleMode()
     }
@@ -88,77 +144,25 @@ class UserDetail: UIViewController {
     func toggleMode() {
         isEditingMode.toggle()
         buttonEditSave.setTitle(isEditingMode ? "Save" : "Edit", for: .normal)
-        table.isUserInteractionEnabled.toggle()
         if isEditingMode {
-            table.backgroundColor = .white
-            view.backgroundColor = .white
-            table.reloadData()
+            genderField.backgroundColor = .white
+            genderField.isEnabled = true
         } else {
-            table.backgroundColor = .systemGray5
-            view.backgroundColor = .systemGray5
-            table.reloadData()
+            genderField.backgroundColor = .systemGray5
+            genderField.isEnabled = false
         }
     }
     
     @objc func close() {
+        ViewController().tableView.reloadData()
         self.dismiss(animated: true, completion: nil)
     }
-}
-
-extension UserDetail: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: UserDetailTableViewCell.identifier,
-            for: indexPath
-        ) as? UserDetailTableViewCell else {
-            return UITableViewCell()
-        }
-        guard let user = model else { return cell }
-        let data: String?
-        let image: String
-        switch indexPath.row {
-        case 0:
-            data = user.name
-            image = "person"
-        case 1:
-            data = user.birthday?.convetrToString() ?? "-"
-            image = "calendar"
-        case 2:
-            data = user.gender ?? "-"
-            image = "person.2"
-        default:
-            data = "-"
-            image = "photo"
-        }
-        cell.configure(with: data,image: image, mode: isEditingMode)
-        return cell
+    func fillField(id: String?) {
+        guard let user = DataStoreManager().getUsersById(id: id ?? "") else { return }
+        nameField.text = user.name
+        birthdayField.text = user.birthday?.convetrToString()
+        genderField.text = user.gender
+        
     }
-}
-
-extension UserDetail: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        90
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        table.deselectRow(at: indexPath, animated: true)
-    }
-}
-
-extension UserDetail: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        gender.count
-    }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        gender[row]
-    }
-    
 }
