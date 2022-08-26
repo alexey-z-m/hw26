@@ -4,22 +4,7 @@ class UserDetail: UIViewController {
     public var idUser: String?
     var model: User?
     let gender = ["male","female"]
-    
-    let buttonClose: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-        button.addTarget(self, action: #selector(close), for: .touchUpInside)
-        return button
-    }()
-    
-    let buttonEditSave: UIButton = {
-        let button = UIButton(type: .roundedRect)
-        button.setTitle("Edit", for: .normal)
-        button.addTarget(self, action: #selector(editAndSaveMode), for: .touchUpInside)
-        button.layer.borderWidth = 1
-        button.layer.cornerRadius = 10
-        return button
-    }()
+    var editButton: UIBarButtonItem?
     
     let imageUser: UIImageView = {
         let image = UIImageView()
@@ -78,11 +63,12 @@ class UserDetail: UIViewController {
         setupHierarchy()
         setupLayout()
         fillField(id: idUser)
+        editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editAndSaveMode))
+        navigationItem.rightBarButtonItem = editButton
+
     }
     
     func setupHierarchy() {
-        view.addSubview(buttonClose)
-        view.addSubview(buttonEditSave)
         view.addSubview(imageUser)
         view.addSubview(nameField)
         view.addSubview(birthdayField)
@@ -90,14 +76,6 @@ class UserDetail: UIViewController {
     }
 
     func setupLayout() {
-        buttonClose.snp.makeConstraints { make in
-            make.left.top.equalToSuperview().offset(20)
-        }
-        buttonEditSave.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
-            make.width.equalTo(70)
-        }
         imageUser.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(150)
             make.height.width.equalTo(200)
@@ -124,6 +102,7 @@ class UserDetail: UIViewController {
     }
     
     @objc func editAndSaveMode() {
+        print("edit")
         if isEditingMode {
             guard let idUser = idUser else { return }
             if nameField.text == "" {
@@ -142,8 +121,9 @@ class UserDetail: UIViewController {
     
     var isEditingMode: Bool = false
     func toggleMode() {
+        print("toggle")
         isEditingMode.toggle()
-        buttonEditSave.setTitle(isEditingMode ? "Save" : "Edit", for: .normal)
+        editButton?.title = isEditingMode ? "Save" : "Edit"
         if isEditingMode {
             genderField.backgroundColor = .white
             genderField.isEnabled = true
@@ -151,11 +131,6 @@ class UserDetail: UIViewController {
             genderField.backgroundColor = .systemGray5
             genderField.isEnabled = false
         }
-    }
-    
-    @objc func close() {
-        ViewController().tableView.reloadData()
-        self.dismiss(animated: true, completion: nil)
     }
     
     func fillField(id: String?) {
