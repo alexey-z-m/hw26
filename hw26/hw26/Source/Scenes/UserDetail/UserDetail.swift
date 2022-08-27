@@ -32,7 +32,8 @@ class UserDetail: UIViewController {
         button.setImage(UIImage(named: "person"), for: .normal)
         button.addTarget(self, action: #selector(editImage), for: .touchUpInside)
         button.imageView?.layer.cornerRadius = 100
-        button.imageView?.contentMode = .scaleAspectFit
+        button.imageView?.contentMode = .scaleAspectFill
+        button.imageView?.layer.masksToBounds = true
         button.tintColor = .blue
         button.isUserInteractionEnabled = false
         return button
@@ -250,7 +251,10 @@ extension UserDetail: UIPickerViewDelegate, UIPickerViewDataSource {
 extension UserDetail: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         imagePicker.dismiss(animated: true)
-        guard let image = info[.originalImage] as? UIImage else { return }
-        imageUser.setImage(image, for: .normal)
+        
+        DispatchQueue.main.async {
+            guard let image = info[.originalImage] as? UIImage else { return }
+            self.imageUser.setImage(image, for: .normal)
+        }
     }
 }

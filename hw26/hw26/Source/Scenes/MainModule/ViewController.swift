@@ -40,17 +40,6 @@ class ViewController: UIViewController {
         return table
     }()
     
-    @objc func addUser() {
-        guard let name = textField.text else { return }
-        if name != "" {
-            DataStoreManager().addUser(name: name)
-            textField.text = ""
-            tableView.reloadData()
-        } else {
-            // add alert msg
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -91,6 +80,17 @@ class ViewController: UIViewController {
         tableView.snp.makeConstraints { make in
             make.top.equalTo(button.snp.bottom).offset(10)
             make.left.right.bottom.equalToSuperview()
+        }
+    }
+    
+    @objc func addUser() {
+        guard let name = textField.text else { return }
+        if name != "" {
+            DataStoreManager().addUser(name: name)
+            textField.text = ""
+            tableView.reloadData()
+        } else {
+            // add alert msg
         }
     }
 }
