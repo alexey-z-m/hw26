@@ -1,10 +1,17 @@
 import UIKit
 
-class UserDetail: UIViewController {
+class UserDetail: UIViewController, UIScrollViewDelegate {
     public var idUser: String?
     var model: User?
     let gender = ["Choose gender","male","female"]
     var editButton: UIBarButtonItem?
+    
+    let scroll: UIScrollView = {
+        let scroll = UIScrollView()
+        return scroll
+    }()
+    
+    let contentView = UIView()
     
     let imagePicker: UIImagePickerController = {
        let picker = UIImagePickerController()
@@ -102,15 +109,20 @@ class UserDetail: UIViewController {
     }
     
     func setupHierarchy() {
-        view.addSubview(imageUser)
-        view.addSubview(nameField)
-        view.addSubview(birthdayField)
-        view.addSubview(genderField)
+        view.addSubview(scroll)
+        scroll.addSubview(contentView)
+        contentView.addSubview(imageUser)
+        contentView.addSubview(nameField)
+        contentView.addSubview(birthdayField)
+        contentView.addSubview(genderField)
     }
 
     func setupLayout() {
+        scroll.frame = view.bounds
+        contentView.frame = view.bounds
+        scroll.contentSize = CGSize(width: contentView.frame.width, height: contentView.frame.height + 30)
         imageUser.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(150)
+            make.top.equalToSuperview().offset(50)
             make.height.width.equalTo(200)
             make.centerX.equalToSuperview()
         }
