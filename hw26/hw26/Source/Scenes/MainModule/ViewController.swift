@@ -8,13 +8,6 @@ class ViewController: UIViewController {
         let user = DataStoreManager().getAllUsers()
         return user
     }
-    let labelUsers: UILabel = {
-       let label = UILabel()
-        label.font = .systemFont(ofSize: 30, weight: .bold)
-        label.textAlignment = .left
-        label.text = "Users"
-        return label
-    }()
     
     let textField: UITextField = {
         let textField = UITextField()
@@ -47,34 +40,30 @@ class ViewController: UIViewController {
         setupLayout()
         tableView.delegate = self
         tableView.dataSource = self
+        title = "Users"
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
     }
     
     func setupHierarchy() {
-        view.addSubview(labelUsers)
         view.addSubview(textField)
         view.addSubview(button)
         view.addSubview(tableView)
     }
     
     func setupLayout() {
-        labelUsers.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(100)
-            make.left.equalToSuperview().offset(30)
-            make.right.equalToSuperview().offset(-30)
-        }
         textField.snp.makeConstraints { make in
-            make.top.equalTo(labelUsers.snp.bottom).offset(10)
-            make.left.equalToSuperview().offset(30)
-            make.right.equalToSuperview().offset(-30)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
             make.height.equalTo(40)
         }
         button.snp.makeConstraints { make in
             make.top.equalTo(textField.snp.bottom).offset(10)
-            make.left.equalToSuperview().offset(30)
-            make.right.equalToSuperview().offset(-30)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
             make.height.equalTo(40)
         }
         tableView.snp.makeConstraints { make in

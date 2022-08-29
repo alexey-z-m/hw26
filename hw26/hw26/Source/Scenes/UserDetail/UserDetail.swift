@@ -120,14 +120,14 @@ class UserDetail: UIViewController, UIScrollViewDelegate {
     func setupLayout() {
         scroll.frame = view.bounds
         contentView.frame = view.bounds
-        scroll.contentSize = CGSize(width: contentView.frame.width, height: contentView.frame.height + 30)
+        scroll.contentSize = CGSize(width: view.frame.width, height: 500)
         imageUser.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(50)
+            make.top.equalToSuperview().offset(10)
             make.height.width.equalTo(200)
             make.centerX.equalToSuperview()
         }
         nameField.snp.makeConstraints { make in
-            make.top.equalTo(imageUser.snp.bottom).offset(100)
+            make.top.equalTo(imageUser.snp.bottom).offset(50)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
             make.height.equalTo(60)
