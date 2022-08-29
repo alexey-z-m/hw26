@@ -138,7 +138,13 @@ class UserDetail: UIViewController {
         if isEditingMode {
             guard let idUser = idUser else { return }
             if nameField.text == "" {
-                //alert
+                let alert = UIAlertController(
+                    title: "Предупреждение",
+                    message: "Не указанно имя пользователя. Сохранение невозможно.",
+                    preferredStyle: .alert
+                )
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil ))
+                self.present(alert, animated: true, completion: nil)
                 return
             }
             DataStoreManager().updateUser(
@@ -237,21 +243,21 @@ extension UserDetail: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         gender.count
     }
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         gender[row]
     }
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if row != 0 {
             genderField.text = gender[row]
         }
     }
-    
 }
 
 extension UserDetail: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         imagePicker.dismiss(animated: true)
-        
         DispatchQueue.main.async {
             guard let image = info[.originalImage] as? UIImage else { return }
             self.imageUser.setImage(image, for: .normal)

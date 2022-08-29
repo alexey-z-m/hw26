@@ -27,7 +27,7 @@ class MainTableViewCell: UITableViewCell {
     }
     
     func configure(with user: User) {
-        label.text = (user.name ?? "No name") //+ " " + (user.id?.uuidString ?? "1")
+        label.text = (user.name ?? "No name")
     }
 
 }

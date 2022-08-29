@@ -90,7 +90,9 @@ class ViewController: UIViewController {
             textField.text = ""
             tableView.reloadData()
         } else {
-            // add alert msg
+            let alert = UIAlertController(title: "Предупреждение", message: "Не указанно имя пользователя. Добавление невозможно.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil ))
+            self.present(alert, animated: true, completion: nil)
         }
     }
 }
@@ -100,7 +102,6 @@ extension ViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let userDetail = UserDetail()
         userDetail.idUser = DataStoreManager().getAllUsers()[indexPath.row].id?.uuidString
-        //present(userDetail, animated: true)
         navigationController?.pushViewController(userDetail, animated: true)
     }
 }
